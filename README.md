@@ -1,5 +1,5 @@
-# globals
-Painless globals in Rust for people who don't mind being unsafe because sometimes it's not a big deal.
+# Globals 🌎
+Painless globals in Rust for people who don't mind being unsafe because sometimes it's not a big deal. Library writers (especially in web assembly) are many times forced to write global data because they don't have a single point of entry.  *This library isn't gauranteed multi-thread safe for now*, but that may not be a problem given your use case.
 
 ```toml
 [dependencies]
@@ -21,7 +21,15 @@ let f = globals::get_mut(handle);
 
 ## remove something from global state
 ```rust
-globals::remove(handle);
+let f = globals::remove(handle);
+```
+
+## get all things of a certain type
+```rust
+let fs = globals::get_all::<Foo>();
+for f in fs.iter() {
+  ...
+}
 ```
 
 ## get a singleton of a type
