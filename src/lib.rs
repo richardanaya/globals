@@ -59,7 +59,7 @@ where
     }
 }
 
-pub fn singleton_mut<T>() -> &'static T
+pub fn singleton_mut<T>() -> &'static mut T
 where
     T: std::default::Default,
 {
