@@ -21,7 +21,7 @@ let f = globals::get_mut(handle);
 
 ## remove something from global state
 ```rust
-let item = globals::remove(handle);
+let f = globals::remove(handle);
 ```
 
 ## get a singleton of a type
