@@ -1,0 +1,10 @@
+[package]
+name = "globals"
+version = "0.0.1"
+authors = ["Richard <Richard>"]
+edition = "2018"
+description = "simple global variables in rust"
+license = "MIT"
+
+[dependencies]
+anymap = "0.12"
