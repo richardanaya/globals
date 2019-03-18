@@ -1,5 +1,5 @@
 # Globals 🌎
-Painless globals in Rust for people who don't mind being unsafe because sometimes it's not a big deal. Library writers (especially in web assembly) are many times forced to write global data because they don't have a single point of entry.  This library isn't gauranteed multi-thread safe for now, but that may not be a problem given your use case.
+Painless globals in Rust for people who don't mind being unsafe because sometimes it's not a big deal. Library writers (especially in web assembly) are many times forced to write global data because they don't have a single point of entry.  *This library isn't gauranteed multi-thread safe for now*, but that may not be a problem given your use case.
 
 ```toml
 [dependencies]
