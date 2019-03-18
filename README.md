@@ -24,6 +24,14 @@ let f = globals::get_mut(handle);
 let f = globals::remove(handle);
 ```
 
+## get all things of a certain type
+```rust
+let fs = globals::get_all::<Foo>();
+for f in fs.iter() {
+  ...
+}
+```
+
 ## get a singleton of a type
 Type must implement Default
 
