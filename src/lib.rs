@@ -17,10 +17,13 @@ pub fn get_all<T>() -> &'static mut Vec<T> {
     }
 }
 
-pub fn add<T>(item: T) -> Global  where T:'static{
+pub fn add<T>(item: T) -> Global
+where
+    T: 'static,
+{
     let v = get_all();
     v.push(item);
-    v.len()-1
+    v.len() - 1
 }
 
 pub fn get<T>(id: Global) -> &'static T {
@@ -31,12 +34,18 @@ pub fn get_mut<T>(id: Global) -> &'static mut T {
     &mut get_all::<T>()[id]
 }
 
-pub fn remove<T>(id: Global) -> T  where T:'static{
+pub fn remove<T>(id: Global) -> T
+where
+    T: 'static,
+{
     let v = get_all();
     v.remove(id)
 }
 
-pub fn singleton<T>() -> &'static T where T:std::default::Default {
+pub fn singleton<T>() -> &'static T
+where
+    T: std::default::Default,
+{
     unsafe {
         if GLOBALS.is_none() {
             GLOBALS = Some(AnyMap::new());
@@ -50,7 +59,10 @@ pub fn singleton<T>() -> &'static T where T:std::default::Default {
     }
 }
 
-pub fn singleton_mut<T>() -> &'static T where T:std::default::Default {
+pub fn singleton_mut<T>() -> &'static T
+where
+    T: std::default::Default,
+{
     unsafe {
         if GLOBALS.is_none() {
             GLOBALS = Some(AnyMap::new());
