@@ -1,5 +1,5 @@
 # Globals 🌎
-Painless globals in Rust for people who don't mind being totally unsafe about it. Library writers (especially in web assembly) are many times forced to write global data because they don't have a single point of entry.  *This library will never be multi-thread safe* (there are much [better alternatives](https://github.com/rust-lang-nursery/lazy-static.rs)), but that may not be a problem given your use case.
+Painless globals in Rust for people who don't mind being totally unsafe about it. Library writers (especially in web assembly) are many times forced to write global data because they don't have a single point of entry.  *This library will never be multi-thread safe* (there are much [better alternatives](https://github.com/rust-lang-nursery/lazy-static.rs) for multithread), but that may not be a problem given your use case.
 
 **use at your own risk of undefined behavior**
 
