@@ -1,9 +1,9 @@
 [package]
 name = "globals"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Richard Anaya"]
 edition = "2018"
-description = "simple global variables in rust"
+description = "Painless but very unsafe global variables in Rust"
 license = "MIT"
 
 [dependencies]

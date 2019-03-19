@@ -10,23 +10,23 @@ globals = "0.0.2"
 
 ```rust
 let f = Foo{}
-let handle = globals::add(foo);
+let handle = unsafe { globals::add(foo) };
 ```
 
 ## get something from global state
 ```rust
-let f = globals::get(handle);
-let f = globals::get_mut(handle);
+let f = unsafe { globals::get(handle) };
+let f = unsafe { globals::get_mut(handle) };
 ```
 
 ## remove something from global state
 ```rust
-let f = globals::remove(handle);
+let f = unsafe { globals::remove(handle) };
 ```
 
 ## get all things of a certain type
 ```rust
-let fs = globals::get_all::<Foo>();
+let fs = unsafe { globals::get_all::<Foo>() };
 for f in fs.iter() {
   ...
 }
@@ -39,6 +39,6 @@ Type must implement Default
 #[derive(Default)]
 struct Foo {}
 
-let f = globals::singleton::<Foo>();
-let f = globals::singleton_mut::<Foo>();
+let f = unsafe { globals::singleton::<Foo>() };
+let f = unsafe { globals::singleton_mut::<Foo>() };
 ```
