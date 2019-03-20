@@ -21,11 +21,6 @@ let f = unsafe { globals::get(handle) };
 let f = unsafe { globals::get_mut(handle) };
 ```
 
-## remove something from global state
-```rust
-let f = unsafe { globals::remove(handle) };
-```
-
 ## get all things of a certain type
 ```rust
 let fs = unsafe { globals::get_all::<Foo>() };
