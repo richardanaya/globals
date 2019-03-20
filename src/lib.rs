@@ -32,14 +32,6 @@ pub unsafe fn get_mut<T>(id: Global) -> &'static mut T {
     &mut get_all::<T>()[id]
 }
 
-pub unsafe fn remove<T>(id: Global) -> T
-where
-    T: 'static,
-{
-    let v = get_all();
-    v.remove(id)
-}
-
 pub unsafe fn singleton<T>() -> &'static T
 where
     T: std::default::Default,
