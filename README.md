@@ -5,7 +5,7 @@ Painless globals in Rust for people who don't mind being totally unsafe about it
 
 ```toml
 [dependencies]
-globals = "0.0.3"
+globals = "0.0.4"
 ```
 
 ## add something into global state
