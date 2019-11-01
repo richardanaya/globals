@@ -4,7 +4,8 @@ version = "0.1.0"
 authors = ["Richard Anaya"]
 edition = "2018"
 description = "Painless global variables in Rust"
-license = "MIT"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/richardanaya/globals"
 
 [dependencies]
 lazy_static = "1.4.0"
