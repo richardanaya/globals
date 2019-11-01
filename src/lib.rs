@@ -28,27 +28,3 @@ pub fn get<T>() -> &'static Mutex<Box<T>> where T:'static+Default+Send{
     }
     get::<T>()
 }
-
-
-#[derive(Debug)]
-struct Foo {
-    v:u32
-}
-
-impl Default for Foo{
-    fn default() -> Self {
-        Foo{v:42}
-    }
-}
-
-#[test]
-fn simple(){
-    {
-        let mut f = get::<Foo>().lock();
-        assert_eq!(42,f.v);
-        f.v = 50;
-        assert_eq!(50,f.v);
-    }
-    let f = get::<Foo>().lock();
-    assert_eq!(50,f.v);
-}
