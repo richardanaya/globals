@@ -3,7 +3,7 @@ Painless globals in Rust. Works with any type that implements Default trait.
 
 ```toml
 [dependencies]
-globals = "0.1.0"
+globals = "0.1"
 ```
 
 Example
