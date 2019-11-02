@@ -60,6 +60,7 @@ mod test {
     fn basic_2() {
         {
             let mut f = get::<Vec<u32>>().lock();
+            let _b = get::<Vec<u8>>().lock();
             f.resize(2_000_000, 0);
         }
         {
