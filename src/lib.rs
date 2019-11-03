@@ -1,26 +1,24 @@
 #![no_std]
 extern crate alloc;
+#[macro_use]
+extern crate lazy_static;
 use alloc::boxed::Box;
 use alloc::collections::linked_list::LinkedList;
 use core::any::Any;
 use core::any::TypeId;
 use spin::Mutex;
 
-static mut GLOBALS_LIST: Option<
-    Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>>,
-> = None;
+lazy_static! {
+    static ref GLOBALS_LIST: Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>> =
+        { Mutex::new(LinkedList::new()) };
+}
 
 pub fn get<T>() -> &'static Mutex<T>
 where
     T: 'static + Default + Send + core::marker::Sync,
 {
     {
-        let mut globals = unsafe {
-            if GLOBALS_LIST.is_none() {
-                GLOBALS_LIST = Some(Mutex::new(LinkedList::new()));
-            }
-            GLOBALS_LIST.as_ref().unwrap().lock()
-        };
+        let mut globals = GLOBALS_LIST.lock();
         let id = TypeId::of::<T>();
         let p = globals.iter().find(|&r| r.0 == id);
         if let Some(v) = p {
