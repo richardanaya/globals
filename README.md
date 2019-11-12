@@ -8,10 +8,10 @@ When I first started studying Rust, getting a simple global variable was oddly d
 
 ```toml
 [dependencies]
-globals = "0.1.3"
+globals = "1"
 ```
 - [x] `#![no_std]` + `alloc`
-- [x] uses `lazy_mutex!` under the covers (battle tested lazy static mutexes) 
+- [x] uses `lazy_mutex!` under the covers (battle tested safe lazy static mutexes) 
 - [x] leaves your code nice and clean
 
 ## Example
@@ -27,10 +27,15 @@ impl Default for Foo {
   }
 }
 
-let f = globals::get::<Foo>();
-
-assert_eq!(f.v,42);
+fn main() {
+  let f = globals::get::<Foo>();
+  assert_eq!(f.v,42);
+}
 ```
+
+# How this works
+
+Rust is a language that values memory safety. When it comes to globals, this means making sure there's exclusive access to things that can be written to. The primary mechanism for protecting globals which could potentially have multiple threads interacting with it is the Mutex. `globals` has a HashMap of singletons of various types stored in a Mutex. When you call `get()` it looks up your singleton, if it doesn't exist, it calls the `Default` trait method `default()` implementation of type to create the singleton instance and stores it in the hashmap. When `get()` is called, this Mutex wrapped singleton is locked and a handle is given to safely interact with this mutex wrapped value -- a `MutexGaurd<T>`. You can interact with the mutex guard as if it were your singleton type (this why it magically looks like you are just interacting with a global). Once your mutex gaurd is dropped, your mutex is unlocked for other threads to interact with your singleton.
 
 # License
 
