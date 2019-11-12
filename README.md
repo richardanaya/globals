@@ -11,7 +11,7 @@ When I first started studying Rust, getting a simple global variable was oddly d
 globals = "1.0.0"
 ```
 - [x] `#![no_std]` + `alloc`
-- [x] uses `lazy_mutex!` under the covers (battle tested lazy static mutexes) 
+- [x] uses `lazy_mutex!` under the covers (battle tested safe lazy static mutexes) 
 - [x] leaves your code nice and clean
 
 ## Example
