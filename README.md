@@ -1,4 +1,4 @@
-# Globals
+# 🔭🌍✨ Globals
 Painless globals in Rust. Works with any type that implements Default trait.
 
 ```toml
