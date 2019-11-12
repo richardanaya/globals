@@ -6,7 +6,7 @@ use alloc::boxed::Box;
 use alloc::collections::linked_list::LinkedList;
 use core::any::Any;
 use core::any::TypeId;
-use spin::{Mutex,MutexGuard};
+use spin::{Mutex, MutexGuard};
 
 lazy_static! {
     static ref GLOBALS_LIST: Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>> =
