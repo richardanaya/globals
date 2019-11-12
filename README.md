@@ -8,8 +8,11 @@ Painless globals in Rust. Works with any type that implements Default trait.
 [dependencies]
 globals = "0.1.3"
 ```
+- [x] `#![no_std]`
+- [x] uses `lazy_mutex!` under the covers
+- [x] leaves your code nice and clean
 
-Example
+## Example
 
 ```rust
 struct Foo {
