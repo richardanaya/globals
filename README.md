@@ -27,7 +27,7 @@ impl Default for Foo {
   }
 }
 
-let f = globals::get::<Foo>().lock();
+let f = globals::get::<Foo>();
 
 assert_eq!(f.v,42);
 ```
