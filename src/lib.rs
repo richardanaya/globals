@@ -73,4 +73,11 @@ mod test {
             assert_eq!(100, f.len());
         }
     }
+
+    #[test]
+    fn basic3() {
+        get::<Foo>().x = 100;
+        let f = get::<Foo>();
+        assert_eq!(100, f.x);
+    }
 }
