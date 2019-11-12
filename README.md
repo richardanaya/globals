@@ -1,4 +1,7 @@
-# 🔭🌍✨ Globals
+# 🌍 Globals
+
+<a href="https://docs.rs/globals"><img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square" alt="docs.rs docs" /></a>
+
 Painless globals in Rust. Works with any type that implements Default trait.
 
 ```toml
