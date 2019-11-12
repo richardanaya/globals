@@ -4,6 +4,8 @@
 
 Painless globals in Rust. Works with any type that implements Default trait.
 
+When I first started studying Rust, getting a simple global variable was oddly difficult. As I became more experienced, I got tired of these weird macros hanging around my code. This is a library for people who like the simplicity of global singleton in a single one liner and instantiation with standard Default trait. This library also uses no standard library by default so it's great for web assembly and embedded development where you want as little extra as possible. Enjoy.
+
 ```toml
 [dependencies]
 globals = "0.1.3"
