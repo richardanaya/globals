@@ -6,14 +6,15 @@ use alloc::boxed::Box;
 use alloc::collections::linked_list::LinkedList;
 use core::any::Any;
 use core::any::TypeId;
-use spin::Mutex;
+use spin::{Mutex,MutexGuard};
 
 lazy_static! {
     static ref GLOBALS_LIST: Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>> =
         { Mutex::new(LinkedList::new()) };
 }
 
-pub fn get<T>() -> &'static Mutex<T>
+/// Get a mutex gaurd handle to globle singletone
+pub fn get<T>() -> MutexGuard<'static, T>
 where
     T: 'static + Default + Send + core::marker::Sync,
 {
@@ -22,7 +23,8 @@ where
         let id = TypeId::of::<T>();
         let p = globals.iter().find(|&r| r.0 == id);
         if let Some(v) = p {
-            return unsafe { &*(v.1 as *const Mutex<dyn Any + Send + Sync> as *const Mutex<T>) };
+            let m = unsafe { &*(v.1 as *const Mutex<dyn Any + Send + Sync> as *const Mutex<T>) };
+            return m.lock();
         }
         let v = Box::new(Mutex::new(T::default()));
         let handle = Box::leak(v);
@@ -48,8 +50,8 @@ mod test {
 
     #[test]
     fn basic() {
-        let f = get::<Foo>().lock();
-        let b = get::<Bar>().lock();
+        let f = get::<Foo>();
+        let b = get::<Bar>();
         assert_eq!(0, f.x);
         assert_eq!(0, b.x);
     }
@@ -57,17 +59,17 @@ mod test {
     #[test]
     fn basic_2() {
         {
-            let mut f = get::<Vec<u32>>().lock();
-            let _b = get::<Vec<u8>>().lock();
+            let mut f = get::<Vec<u32>>();
+            let _b = get::<Vec<u8>>();
             f.resize(2_000_000, 0);
         }
         {
-            let mut f = get::<Vec<u32>>().lock();
+            let mut f = get::<Vec<u32>>();
             assert_eq!(2_000_000, f.len());
             f.resize(100, 0);
         }
         {
-            let f = get::<Vec<u32>>().lock();
+            let f = get::<Vec<u32>>();
             assert_eq!(100, f.len());
         }
     }

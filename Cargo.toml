@@ -1,6 +1,6 @@
 [package]
 name = "globals"
-version = "0.1.3"
+version = "1.0.0"
 authors = ["Richard Anaya"]
 edition = "2018"
 description = "Painless global variables in Rust"
