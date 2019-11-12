@@ -8,7 +8,7 @@ When I first started studying Rust, getting a simple global variable was oddly d
 
 ```toml
 [dependencies]
-globals = "1.0.0"
+globals = "1"
 ```
 - [x] `#![no_std]` + `alloc`
 - [x] uses `lazy_mutex!` under the covers (battle tested safe lazy static mutexes) 
