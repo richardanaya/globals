@@ -13,7 +13,7 @@ lazy_static! {
         { Mutex::new(LinkedList::new()) };
 }
 
-/// Get a mutex gaurd handle to globle singletone
+/// Get a mutex gaurd handle to globle singleton
 pub fn get<T>() -> MutexGuard<'static, T>
 where
     T: 'static + Default + Send + core::marker::Sync,
