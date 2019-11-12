@@ -9,7 +9,7 @@ Painless globals in Rust. Works with any type that implements Default trait.
 globals = "0.1.3"
 ```
 - [x] `#![no_std]`
-- [x] uses `lazy_mutex!` under the covers
+- [x] uses `lazy_mutex!` under the covers (battle tested lazy static mutexes) 
 - [x] leaves your code nice and clean
 
 ## Example
