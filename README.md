@@ -27,9 +27,10 @@ impl Default for Foo {
   }
 }
 
-let f = globals::get::<Foo>();
-
-assert_eq!(f.v,42);
+fn main() {
+  let f = globals::get::<Foo>();
+  assert_eq!(f.v,42);
+}
 ```
 
 # License
