@@ -1,16 +1,18 @@
 #![no_std]
 extern crate alloc;
-#[macro_use]
-extern crate lazy_static;
 use alloc::boxed::Box;
 use alloc::collections::linked_list::LinkedList;
 use core::any::Any;
 use core::any::TypeId;
 use spin::{Mutex, MutexGuard};
 
-lazy_static! {
-    static ref GLOBALS_LIST: Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>> =
-        { Mutex::new(LinkedList::new()) };
+use once_cell::sync::OnceCell;
+
+fn globals() -> &'static Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>> {
+    static GLOBALS_LIST: OnceCell<Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>>> = OnceCell::new();
+    GLOBALS_LIST.get_or_init(|| {
+        Mutex::new(LinkedList::new())
+    })
 }
 
 /// Get a mutex gaurd handle to globle singleton
@@ -19,7 +21,7 @@ where
     T: 'static + Default + Send + core::marker::Sync,
 {
     {
-        let mut globals = GLOBALS_LIST.lock();
+        let mut globals = globals().lock();
         let id = TypeId::of::<T>();
         let p = globals.iter().find(|&r| r.0 == id);
         if let Some(v) = p {

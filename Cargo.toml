@@ -1,6 +1,6 @@
 [package]
 name = "globals"
-version = "1.0.1"
+version = "1.0.2"
 authors = ["Richard Anaya"]
 edition = "2018"
 description = "Painless global variables in Rust"
@@ -9,4 +9,7 @@ repository = "https://github.com/richardanaya/globals"
 
 [dependencies]
 spin = "0.5"
-lazy_static = "1.4.0"
+
+[dependencies.once_cell]
+version = "1"
+features = []
