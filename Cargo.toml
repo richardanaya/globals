@@ -1,6 +1,6 @@
 [package]
 name = "globals"
-version = "1.0.3"
+version = "1.0.4"
 authors = ["Richard Anaya"]
 edition = "2021"
 description = "Painless global variables in Rust"
@@ -11,4 +11,4 @@ readme = "README.md"
 rust-version="1.63"
 
 [dependencies]
-spin = "0.5"
+spin = "0"
