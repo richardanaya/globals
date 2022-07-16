@@ -6,14 +6,8 @@ use core::any::Any;
 use core::any::TypeId;
 use spin::{Mutex, MutexGuard};
 
-use once_cell::sync::OnceCell;
-
-fn globals() -> &'static Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>> {
-    static GLOBALS_LIST: OnceCell<Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>>> = OnceCell::new();
-    GLOBALS_LIST.get_or_init(|| {
-        Mutex::new(LinkedList::new())
-    })
-}
+static GLOBALS_LIST: Mutex<LinkedList<(TypeId, &'static Mutex<dyn Any + Send + Sync>)>> =
+    Mutex::new(LinkedList::new());
 
 /// Get a mutex gaurd handle to globle singleton
 pub fn get<T>() -> MutexGuard<'static, T>
@@ -21,7 +15,7 @@ where
     T: 'static + Default + Send + core::marker::Sync,
 {
     {
-        let mut globals = globals().lock();
+        let mut globals = GLOBALS_LIST.lock();
         let id = TypeId::of::<T>();
         let p = globals.iter().find(|&r| r.0 == id);
         if let Some(v) = p {

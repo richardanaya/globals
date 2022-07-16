@@ -1,15 +1,14 @@
 [package]
 name = "globals"
-version = "1.0.2"
+version = "1.0.3"
 authors = ["Richard Anaya"]
-edition = "2018"
+edition = "2021"
 description = "Painless global variables in Rust"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/richardanaya/globals"
+categories = ["wasm", "no-std"]
+readme = "README.md"
+rust-version="1.63"
 
 [dependencies]
 spin = "0.5"
-
-[dependencies.once_cell]
-version = "1"
-features = []
